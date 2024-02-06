@@ -9,7 +9,7 @@ export class RolesService {
     }
 
     async getRoleByValue(value: string) {
-        return this.userRoleRepository.findAll({where: {value}});
+        return this.userRoleRepository.findOne({where: {value}});
     }
 
     async createRole(role: CreateRoleDto) {

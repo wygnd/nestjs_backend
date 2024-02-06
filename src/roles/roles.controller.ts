@@ -10,7 +10,7 @@ import {RolesModel} from "./roles.model";
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
-  @ApiOperation({summary: "Получить роль по значение."})
+  @ApiOperation({summary: "Получить роль по значению"})
   @ApiResponse({status: 200, type: RolesModel})
   @Get('/:value')
   async getRoleByValue(@Param('value') value: string) {

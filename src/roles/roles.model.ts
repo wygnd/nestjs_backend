@@ -8,7 +8,7 @@ interface RoleCreationAttrs {
     description: string
 }
 
-@Table({tableName: "roles"})
+@Table({tableName: "roles", timestamps: false, updatedAt: false})
 export class RolesModel extends Model<RolesModel, RoleCreationAttrs> {
     @ApiProperty({example: 1, description: "Уникальный идентификатор"})
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})

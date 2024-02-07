@@ -12,7 +12,7 @@ export class AuthController {
 
     @ApiOperation({summary: "Авторизация пользователя"})
     @ApiResponse({status: 200, type: UserModel})
-    @Post('/singin')
+    @Post('/signin')
     async login(@Body() user: CreateUserDto) {
       return this.authService.login(user);
     }

@@ -31,6 +31,14 @@ export class UsersService {
         return this.userRepository.findOne({where: {email}, include: {all: true}})
     }
 
+    async getUserById(user_id: string) {
+        const user = await this.userRepository.findByPk(user_id);
+        if(!user) {
+            throw new HttpException(`Пользователя с id ${user_id} не найдено`, HttpStatus.NOT_FOUND)
+        }
+        return user;
+    }
+
     async addRole(dto: AddRoleDto) {}
 
     async banUser(dto: BanUserDto) {}

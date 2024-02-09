@@ -9,6 +9,7 @@ import {UserRolesModel} from "./roles/user-roles.model";
 import {AuthModule} from './auth/auth.module';
 import {loggerMiddleware} from "./users/middleware/logger.middleware";
 import {UsersController} from "./users/users.controller";
+import { UploadsModule } from './uploads/uploads.module';
 
 @Module({
     imports: [
@@ -28,7 +29,8 @@ import {UsersController} from "./users/users.controller";
         }),
         UsersModule,
         RolesModule,
-        AuthModule
+        AuthModule,
+        UploadsModule
     ],
     controllers: [],
     providers: [],

@@ -32,14 +32,25 @@ export class UsersService {
     }
 
     async getUserById(user_id: string) {
-        const user = await this.userRepository.findByPk(user_id);
+        const user = await this.userRepository.findByPk(user_id, {include: {all: true}});
         if(!user) {
             throw new HttpException(`Пользователя с id ${user_id} не найдено`, HttpStatus.NOT_FOUND)
         }
         return user;
     }
 
-    async addRole(dto: AddRoleDto) {}
+    async addRole(dto: AddRoleDto) {
+        const user = await this.userRepository.findByPk(dto.user_id);
+        const role = await this.roleService.getRoleByValue(dto.value);
+        if(!user) {
+            throw new HttpException(`Пользователя с id=${dto.user_id} не найдено`, HttpStatus.NOT_FOUND);
+        }
+
+        if(!role) {
+            throw new HttpException(`Роли со значением ${dto.value} не найдено`, HttpStatus.NOT_FOUND);
+        }
+
+    }
 
     async banUser(dto: BanUserDto) {}
 }

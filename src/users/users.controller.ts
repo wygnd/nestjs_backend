@@ -1,13 +1,12 @@
 import {Body, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {CreateUserDto} from "./dto/create-user.dto";
-import {ApiOperation, ApiProperty, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {UserModel} from "./user.model";
 import {Roles} from "../auth/roles-auth.decorator";
 import {RolesGuard} from "../auth/roles.guard";
 import {AddRoleDto} from "./dto/add-role.dto";
 import {BanUserDto} from "./dto/ban-user.dto";
-import {ForbiddenExceptions} from "../exceptions/forbidden.exceptions";
 
 @ApiTags('Users')
 @Controller('users')
@@ -24,8 +23,8 @@ export class UsersController {
 
     @ApiOperation({summary: "Получение всех пользователей"})
     @ApiResponse({status: 200, type: [UserModel]})
-    @Roles("ADMIN")
-    @UseGuards(RolesGuard)
+    // @Roles("ADMIN")
+    // @UseGuards(RolesGuard)
     @Get()
     getAll() {
         return this.usersService.getUsers();
@@ -53,7 +52,6 @@ export class UsersController {
     @ApiResponse({status: 200})
     @Get('/:user_id')
     getUserById(@Param('user_id') user_id: string) {
-        // return this.usersService.getUserById(user_id);
-        throw  new ForbiddenExceptions();
+        return this.usersService.getUserById(user_id);
     }
 }
